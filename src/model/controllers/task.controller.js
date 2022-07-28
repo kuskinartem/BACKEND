@@ -64,42 +64,42 @@ const changeTaskText = async (req, res) => {
     }
   };
 
-  const changeTaskCheckbox = async (req, res) => {
-    try {
-      const _id = await req.params._id;
-      const isCheck = await req.body.isCheck;
+const changeTaskCheckbox = async (req, res) => {
+  try {
+    const _id = await req.params._id;
+    const isCheck = await req.body.isCheck;
 
-      if(!req.params.hasOwnProperty('_id') 
-      || _id === ''
-      || !req.body.hasOwnProperty('isCheck')
-      || typeof isCheck !== 'boolean') {
-        throw new Error();
-      };
-      const task = await Task.findOneAndUpdate (
-        {_id},
-        {$set : {isCheck}},
-        {new: true},
-      );
-      res.status(200).send(task);
-    } catch (error) {
-      res.status(400).send('Fail to change');
-    }
+    if(!req.params.hasOwnProperty('_id') 
+    || _id === ''
+    || !req.body.hasOwnProperty('isCheck')
+    || typeof isCheck !== 'boolean') {
+      throw new Error();
+    };
+    const task = await Task.findOneAndUpdate (
+      {_id},
+      {$set : {isCheck}},
+      {new: true},
+    );
+    res.status(200).send(task);
+  } catch (error) {
+    res.status(400).send('Fail to change');
   }
+}
   
-  const deleteAllTask = async (req, res) => {
-    try {
-      const result = await Task.deleteMany({});
-      res.status(200).send(result);
-    } catch(error) {
-      res.status(400).send('Fail delete tasks');
-    }
-  };
+const deleteAllTask = async (req, res) => {
+  try {
+    const result = await Task.deleteMany({});
+    res.status(200).send(result);
+  } catch(error) {
+    res.status(400).send('Fail delete tasks');
+  }
+};
   
-  module.exports = {
-    deleteAllTask,
-    createNewTask,
-    getAllTasks,
-    deleteTask,
-    changeTaskCheckbox,
-    changeTaskText,
+module.exports = {
+  deleteAllTask,
+  createNewTask,
+  getAllTasks,
+  deleteTask,
+  changeTaskCheckbox,
+  changeTaskText,
   }
