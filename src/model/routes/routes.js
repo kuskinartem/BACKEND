@@ -2,9 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const {
-    getAllTask,
     createNewTask,
-    changeTaskInfo,
     deleteAllTask,
     changeTaskCheckbox,
     deleteTask,

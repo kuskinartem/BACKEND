@@ -3,7 +3,10 @@ const {Schema} = mongoose;
 
 const taskScheme = new Schema({
     text: String,
-    isCheck: Boolean
+    isCheck: {
+      type: Boolean,
+      default: false,
+    }
   });
 
   module.exports = Task = mongoose.model("Tasks", taskScheme)

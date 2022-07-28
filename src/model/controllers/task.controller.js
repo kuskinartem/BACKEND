@@ -1,4 +1,4 @@
-const Task = require('../../models/task');
+const Task = require('../../modules/task');
 
 const validationString = (string) => {
   return(typeof string === 'string' && string !== "");
@@ -98,10 +98,10 @@ const changeTaskText = async (req, res) => {
   };
   
   module.exports = {
-   deleteAllTask,
-   createNewTask,
-   getAllTasks,
-   deleteTask,
-   changeTaskCheckbox,
-   changeTaskText,
+    deleteAllTask,
+    createNewTask,
+    getAllTasks,
+    deleteTask,
+    changeTaskCheckbox,
+    changeTaskText,
   }
