@@ -19,7 +19,7 @@ const createNewTask = async (req, res) => {
       throw new Error()
     };
 
-    const newTask = new Task({test});
+    const newTask = new Task({text});
     const result = await newTask.save();
     res.status(200).send(result);
     } catch(error) {
