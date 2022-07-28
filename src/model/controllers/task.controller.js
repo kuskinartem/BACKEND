@@ -1,8 +1,6 @@
 const Task = require('../../modules/task');
 
-const validationString = (string) => {
-  return(typeof string === 'string' && string !== "");
-}
+const validationString = require('../../helpers/valid.js')
 
 const getAllTasks = async (req, res) => {
   try {
