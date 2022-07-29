@@ -3,7 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const app = express();
-const apiRoutes = require("./src/model/routes/routes.js");
+const apiRoutes = require('./src/model/routes/routes.js');
 const {
   URL,
   PORT
@@ -19,10 +19,11 @@ const connect = () => {
     app.listen(PORT, () => {
       console.log(`Example app listening on port ${PORT}`)
     }); 
-    } catch {
+  
+  } catch(error) {
       console.error('Connection not created');
       process.exit(1)
-    }
+  }
 };
 
 connect()
