@@ -1,4 +1,4 @@
-const Task = require('../../modules/task');
+const Task = require('../../modul/task');
 
 const validationString = require('../../helpers/validation.js');
 
