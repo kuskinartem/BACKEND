@@ -21,8 +21,8 @@ const connect = () => {
     }); 
   
   } catch(error) {
-      console.error('Connection not created');
-      process.exit(1)
+    console.log('Connection not created');
+    process.exit(1)
   }
 };
 

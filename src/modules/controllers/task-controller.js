@@ -7,29 +7,24 @@ const getAllTasks = async (req, res) => {
     const allTasks = await Task.find();
     res.status(200).send(allTasks);
   } catch (error) {
-      res.status(400).send('Task retrieval error');
+    res.status(400).send('Task retrieval error');
   }
 };
   
 const createNewTask = async (req, res) => {
   try {
-    const task =  req.body.text;
-
-    if (!req.body.hasOwnProperty('text') || !validationString(text)) {
-      throw new Error();
-    };
-
-    const newTask = new Task ({text});
-    const result = await newTask.save();
+    const text =  req.body.text;
+    const task = new Task ({ text });
+    const result = await task.save();
     res.status(200).send(result);
   } catch(error) {
-      res.status(400).send('Task send error')
-    }
-  };
+    res.status(400).send('Task send error')
+  }
+};
 
 const deleteTask = async (req, res) => {
   try {
-    const _id = req.params.id;
+    const _id = req.params._id;
     if (!req.params.hasOwnProperty('_id') || _id === "") {
       throw new Error();
     };
@@ -44,45 +39,47 @@ const deleteTask = async (req, res) => {
   
 const changeTaskText = async (req, res) => {
   try {
-    const _id = await req.params._id;
-    const text =  req.body.text;
+    const _id = req.params._id;
+    const text = req.body.text;
 
-    if(!req.params.hasOwnProperty('_id') 
+    if (!req.params.hasOwnProperty('_id') 
       || _id === ''
       || !req.body.hasOwnProperty('text')
-      || !validationString(text)) {
+      || !validationString(text)) 
+      {
         throw new Error();
-    };
-    const task = await Task.findOneAndUpdate(
-    { _id },
-    { $set: { text } },
-    { new: true },
+      };
+      const task = await Task.findOneAndUpdate(
+      { _id },
+      { $set: { text } },
+      { new: true },
     );
     res.status(200).send(task);
   } catch (error) {
-      res.status(400).send('Fail to change');
+    res.status(400).send('Fail to change');
   }
 };
 
 const changeTaskCheckbox = async (req, res) => {
   try {
-    const _id = await req.params._id;
+    const _id = req.params._id;
     const isCheck = req.body.isCheck;
 
     if (!req.params.hasOwnProperty('_id') 
       || _id === ''
       || !req.body.hasOwnProperty('isCheck')
-      || typeof isCheck !== 'boolean') {
+      || typeof isCheck !== 'boolean') 
+      {
       throw new Error();
-    };
-    const task = await Task.findOneAndUpdate(
+      }
+      const task = await Task.findOneAndUpdate(
       { _id },
       { $set: { isCheck } },
       { new: true },
     );
     res.status(200).send(task);
   } catch (error) {
-      res.status(400).send('Fail to change');
+    res.status(400).send('Fail to change');
   }
 }
   
@@ -102,4 +99,4 @@ module.exports = {
   deleteTask,
   changeTaskCheckbox,
   changeTaskText,
-  }
+}
