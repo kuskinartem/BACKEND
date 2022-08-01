@@ -10,14 +10,14 @@ const getAllTasks = async (req, res) => {
     res.status(400).send('Task retrieval error');
   }
 };
-  
+
 const createNewTask = async (req, res) => {
   try {
-    const text =  req.body.text;
-    const task = new Task ({ text });
+    const text = req.body.text;
+    const task = new Task({ text });
     const result = await task.save();
     res.status(200).send(result);
-  } catch(error) {
+  } catch (error) {
     res.status(400).send('Task send error')
   }
 };
@@ -29,27 +29,25 @@ const deleteTask = async (req, res) => {
       throw new Error();
     };
 
-    const deleteTask = await Task.deleteOne ({ _id });
+    const deleteTask = await Task.deleteOne({ _id });
     res.status(200).send(deleteTask);
-  } catch(error) {
-      res.status(400).send('Failed delete task')
+  } catch (error) {
+    res.status(400).send('Failed delete task')
   }
 };
 
-  
+
 const changeTaskText = async (req, res) => {
   try {
-    const _id = req.params._id;
+    const params = req.params;
+    const _id = params._id;
     const text = req.body.text;
-
-    if (!req.params.hasOwnProperty('_id') 
+    if (!params.hasOwnProperty('_id')
       || _id === ''
-      || !req.body.hasOwnProperty('text')
-      || !validationString(text)) 
-      {
-        throw new Error();
-      };
-      const task = await Task.findOneAndUpdate(
+      || !req.body.hasOwnProperty('text')) {
+      throw new Error();
+    };
+    const task = await Task.findOneAndUpdate(
       { _id },
       { $set: { text } },
       { new: true },
@@ -65,14 +63,13 @@ const changeTaskCheckbox = async (req, res) => {
     const _id = req.params._id;
     const isCheck = req.body.isCheck;
 
-    if (!req.params.hasOwnProperty('_id') 
+    if (!req.params.hasOwnProperty('_id')
       || _id === ''
       || !req.body.hasOwnProperty('isCheck')
-      || typeof isCheck !== 'boolean') 
-      {
+      || typeof isCheck !== 'boolean') {
       throw new Error();
-      }
-      const task = await Task.findOneAndUpdate(
+    }
+    const task = await Task.findOneAndUpdate(
       { _id },
       { $set: { isCheck } },
       { new: true },
@@ -82,16 +79,16 @@ const changeTaskCheckbox = async (req, res) => {
     res.status(400).send('Fail to change');
   }
 }
-  
+
 const deleteAllTask = async (req, res) => {
   try {
     const result = await Task.deleteMany({});
     res.status(200).send(result);
-  } catch(error) {
+  } catch (error) {
     res.status(400).send('Fail delete tasks');
   }
 };
-  
+
 module.exports = {
   deleteAllTask,
   createNewTask,
