@@ -1,7 +1,5 @@
 const Task = require('../../modul/task');
 
-const validationString = require('../../helpers/validation.js');
-
 const getAllTasks = async (req, res) => {
   try {
     const allTasks = await Task.find();
@@ -25,7 +23,7 @@ const createNewTask = async (req, res) => {
 const deleteTask = async (req, res) => {
   try {
     const _id = req.params._id;
-    if (!req.params.hasOwnProperty('_id') || _id === "") {
+    if (!_id) {
       throw new Error();
     };
 
@@ -38,13 +36,12 @@ const deleteTask = async (req, res) => {
 
 
 const changeTaskText = async (req, res) => {
-  try {
-    const params = req.params;
-    const _id = params._id;
-    const text = req.body.text;
-    if (!params.hasOwnProperty('_id')
-      || _id === ''
-      || !req.body.hasOwnProperty('text')) {
+  //try {
+    const {text} = req.body;
+    const {_id} = req.params;
+
+    if (!_id
+      || !'text') {
       throw new Error();
     };
     const task = await Task.findOneAndUpdate(
@@ -53,9 +50,9 @@ const changeTaskText = async (req, res) => {
       { new: true },
     );
     res.status(200).send(task);
-  } catch (error) {
-    res.status(400).send('Fail to change');
-  }
+  //} catch (error) {
+    //res.status(400).send('Fail to change');
+  //}
 };
 
 const changeTaskCheckbox = async (req, res) => {
@@ -63,9 +60,8 @@ const changeTaskCheckbox = async (req, res) => {
     const _id = req.params._id;
     const isCheck = req.body.isCheck;
 
-    if (!req.params.hasOwnProperty('_id')
-      || _id === ''
-      || !req.body.hasOwnProperty('isCheck')
+    if (!_id
+      || !'isCheck'
       || typeof isCheck !== 'boolean') {
       throw new Error();
     }

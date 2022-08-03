@@ -1,5 +1,16 @@
-const validationString = (string) => {
-  typeof string === 'string' && string !== "";
-}
+const { check, validationResult  } = require('express-validator');
 
-module.exports = validationString;  
+const handleValidationError = (res, req, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) return res.status(422).json({ message: 'Validation error', error: errors.array() });
+  next();
+};
+
+module.export = createValidator = [
+  check ('text').notEmpty().isNumeric().isLength({min: 1}),
+  check('isCheck').notEmpty().isString(),
+  handleValidationError
+];
+
+
+module.exports = createValidator
