@@ -6,7 +6,7 @@ const handleValidationError = (res, req, next) => {
   next();
 };
 
-module.export = createValidator = [
+createValidator = [
   check ('text').notEmpty().isNumeric().isLength({min: 1}),
   check('isCheck').notEmpty().isString(),
   handleValidationError
