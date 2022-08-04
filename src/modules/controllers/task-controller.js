@@ -22,6 +22,11 @@ const createNewTask = async (req, res) => {
 
 const deleteTask = async (req, res) => {
   try {
+    const _id = req.params._id;
+    if (!_id) {
+      throw new Error();
+    };
+
     const deleteTask = await Task.deleteOne({ _id });
     res.status(200).send(deleteTask);
   } catch (error) {

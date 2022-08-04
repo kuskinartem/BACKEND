@@ -10,10 +10,6 @@ const creatValidator = [
     check('text').notEmpty().isLength({ min: 1 }),
     handleValidationError,
   ];
-  const idValidator = [
-    check('_id').notEmpty().isLength({ min: 1 }).isString(),
-    handleValidationError,
-  ];
 
   const changeValidator = [
     check('_id').notEmpty().isLength({ min: 1 }).isString(),
@@ -29,7 +25,6 @@ const creatValidator = [
 
   module.exports = {
     creatValidator,
-    idValidator,
     changeValidator,
     checkBox
   }
