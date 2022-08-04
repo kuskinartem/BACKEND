@@ -37,8 +37,8 @@ const deleteTask = async (req, res) => {
 
 const changeTaskText = async (req, res) => {
   try {
-    const {text} = req.body;
-    const {_id} = req.params;
+    const { text } = req.body;
+    const { _id } = req.params;
     const task = await Task.findOneAndUpdate(
       { _id },
       { $set: { text } },
