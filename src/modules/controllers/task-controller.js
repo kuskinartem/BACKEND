@@ -51,7 +51,7 @@ const changeTaskText = async (req, res) => {
     );
     res.status(200).send(task);
   } catch (error) {
-    //res.status(400).send('Fail to change');
+    res.status(400).send('Fail to change');
   }
 };
 
