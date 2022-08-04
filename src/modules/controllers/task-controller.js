@@ -36,7 +36,7 @@ const deleteTask = async (req, res) => {
 
 
 const changeTaskText = async (req, res) => {
-  //try {
+  try {
     const {text} = req.body;
     const {_id} = req.params;
 
@@ -50,9 +50,9 @@ const changeTaskText = async (req, res) => {
       { new: true },
     );
     res.status(200).send(task);
-  //} catch (error) {
+  } catch (error) {
     //res.status(400).send('Fail to change');
-  //}
+  }
 };
 
 const changeTaskCheckbox = async (req, res) => {
