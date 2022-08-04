@@ -1,6 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const createValidator = require('../../helpers/validation');
+const {
+  creatValidator,
+  idValidator,
+  changeValidator,
+  checkBox
+} = require('../../helpers/validation');
 
 const {
   createNewTask,
@@ -12,10 +17,10 @@ const {
 } = require('../controllers/task-controller');
 
 router.get('/tasks', getAllTasks);
-router.post('/tasks', createValidator , createNewTask);
-router.patch('/tasks/:_id', changeTaskText);
-router.patch('/tasks/:_id/checkbox', changeTaskCheckbox);
-router.delete('/tasks/:_id', deleteTask);
+router.post('/tasks', creatValidator , createNewTask);
+router.patch('/tasks/:_id', changeValidator, changeTaskText);
+router.patch('/tasks/:_id/checkbox',checkBox, changeTaskCheckbox);
+router.delete('/tasks/:_id',idValidator, deleteTask);
 router.delete('/tasks', deleteAllTask);
 
 module.exports = router;

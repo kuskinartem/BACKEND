@@ -22,11 +22,6 @@ const createNewTask = async (req, res) => {
 
 const deleteTask = async (req, res) => {
   try {
-    const _id = req.params._id;
-    if (!_id) {
-      throw new Error();
-    };
-
     const deleteTask = await Task.deleteOne({ _id });
     res.status(200).send(deleteTask);
   } catch (error) {
@@ -39,11 +34,6 @@ const changeTaskText = async (req, res) => {
   try {
     const {text} = req.body;
     const {_id} = req.params;
-
-    if (!_id
-      || !'text') {
-      throw new Error();
-    };
     const task = await Task.findOneAndUpdate(
       { _id },
       { $set: { text } },
@@ -59,12 +49,6 @@ const changeTaskCheckbox = async (req, res) => {
   try {
     const _id = req.params._id;
     const isCheck = req.body.isCheck;
-
-    if (!_id
-      || !'isCheck'
-      || typeof isCheck !== 'boolean') {
-      throw new Error();
-    }
     const task = await Task.findOneAndUpdate(
       { _id },
       { $set: { isCheck } },
